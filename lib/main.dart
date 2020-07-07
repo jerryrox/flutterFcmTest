@@ -1,10 +1,66 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+Future<dynamic> onFcmBackgroundMessage(Map<String, dynamic> message) {
+  print("onBackgroundMessage: $message");
+}
+
+class MyApp extends StatefulWidget {
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
+  String _token = "";
+  String _message = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _getMessage();
+  }
+
+  void _getMessage() {
+    _firebaseMessaging.configure(
+      onBackgroundMessage: onFcmBackgroundMessage,
+      onLaunch: (message) async {
+        setState(() {
+          this._message = message["notification"]["title"];
+        });
+        print("onLaunch: $message");
+      },
+      onMessage: (message) async {
+        setState(() {
+          this._message = message["notification"]["title"];
+        });
+        print("onMessage: $message");
+      },
+      onResume: (message) async {
+        setState(() {
+          this._message = message["notification"]["title"];
+        });
+        print("onResume: $message");
+      }
+    );
+  }
+
+  void _onRegisterButton() {
+    _firebaseMessaging.getToken().then((value) {
+      setState(() {
+        this._token = value;
+      });
+      print("Token: $value");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,54 +69,24 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    //
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("FCM Test"),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Token: $_token"),
+              Text("Message: $_message"),
+              FlatButton(
+                child: Text("Register device"),
+                onPressed: _onRegisterButton,
+              ),
+            ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
     );
   }
 }
