@@ -1,6 +1,9 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import "./views/HomeView.dart";
+import 'package:flutterFcmTest/models/ActivityModel.dart';
+import 'package:flutterFcmTest/models/ActivityModelMemory.dart';
+import 'package:provider/provider.dart';
+import 'views/ActivityView.dart';
 
 void main() {
   runApp(FcmTestApp());
@@ -16,8 +19,13 @@ class FcmTestApp extends StatelessWidget {
         accentColor: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SafeArea(
-        child: HomeView(),
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<ActivityModel>(create: (_) => ActivityModelMemory()),
+        ],
+        child: SafeArea(
+          child: ActivityView(),
+        ),
       ),
     );
   }

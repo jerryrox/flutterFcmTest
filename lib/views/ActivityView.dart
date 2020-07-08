@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutterFcmTest/components/Home/ActivityList.dart';
-import 'package:flutterFcmTest/components/Home/MenuBar.dart';
+import 'package:flutterFcmTest/components/Activity/ActivityList.dart';
+import 'package:flutterFcmTest/components/Activity/MenuBar.dart';
 
-class HomeView extends StatelessWidget {
+class ActivityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
