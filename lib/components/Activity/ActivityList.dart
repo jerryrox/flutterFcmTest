@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterFcmTest/components/Home/ActivityCell.dart';
+import 'package:flutterFcmTest/components/Activity/ActivityCell.dart';
 import 'package:flutterFcmTest/models/ActivityModel.dart';
 import 'package:provider/provider.dart';
 

@@ -1,13 +1,46 @@
-import 'package:flutter/material.dart';
+import 'dart:math';
 
-class MenuBar extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:flutterFcmTest/models/Activity/ActivityInfo.dart';
+import 'package:flutterFcmTest/models/ActivityModel.dart';
+import 'package:flutterFcmTest/models/common/DayType.dart';
+import 'package:provider/provider.dart';
+
+class MenuBar extends StatefulWidget {
+
+  @override
+  _MenuBarState createState() => _MenuBarState();
+}
+
+class _MenuBarState extends State<MenuBar> {
+
+  Random _random = Random();
+
+  String getRandomName() => "Random name ${_random.nextInt(1000)}";
+
+  List<DayType> getRandomDays() {
+    var days = List<DayType>();
+    DayType.values.forEach((day) {
+      if(_random.nextDouble() < 0.35) {
+        days.add(day);
+      }
+    });
+    if(days.length == 0) {
+      days.add(DayType.Monday);
+    }
+    return days;
+  }
 
   void _onCalendarButton() {
     print("_onCalendarButton");
   }
 
-  void _onAddButton() {
+  void _onAddButton(ActivityModel model) {
     print("_onAddButton");
+    model.add(ActivityInfo(
+      name: getRandomName(),
+      days: getRandomDays()
+    ));
   }
 
   void _onMenuButton() {
@@ -16,12 +49,14 @@ class MenuBar extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+
+    final activityModel = Provider.of<ActivityModel>(context);
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          // TODO: Change this to today's date
-          "Jul 8",
+          "Scheduled activities",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 24.0
@@ -45,7 +80,7 @@ class MenuBar extends StatelessWidget {
             color: Colors.black,
             size: 20.0
           ),
-          onPressed: _onAddButton,
+          onPressed: () => _onAddButton(activityModel),
         ),
         IconButton(
           icon: Icon(

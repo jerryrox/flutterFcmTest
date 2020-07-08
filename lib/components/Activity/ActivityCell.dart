@@ -28,31 +28,28 @@ class ActivityCell extends StatelessWidget {
         ),
         onPressed: _onClicked,
         color: Colors.purple[300],
-        child: Expanded(
-          flex: 1,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Text(
-                    activity.name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                    textAlign: TextAlign.left,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Text(
+                  activity.name,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    "Days: ${activity.getDaysString()}"
-                  ),
-                ],
-              ),
-            ],
-          ),
+                  textAlign: TextAlign.left,
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Text(
+                  "Days: ${activity.getDaysString()}"
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

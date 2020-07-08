@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterFcmTest/components/Home/ActivityList.dart';
-import 'package:flutterFcmTest/components/Home/MenuBar.dart';
+import 'package:flutterFcmTest/components/Activity/ActivityList.dart';
+import 'package:flutterFcmTest/components/Activity/MenuBar.dart';
 
 class ActivityView extends StatelessWidget {
 
