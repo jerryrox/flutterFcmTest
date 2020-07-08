@@ -7,3 +7,10 @@ enum DayType {
   Saturday,
   Sunday
 }
+
+extension DayTypeExtension on DayType {
+
+  String toValueString() {
+    return this.toString().split(".").last;
+  }
+}

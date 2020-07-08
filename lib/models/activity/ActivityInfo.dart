@@ -15,7 +15,7 @@ class ActivityInfo {
     for(int i=0; i<days.length; i++) {
       if(i > 0)
         str += ", ";
-      str += days[i].toString();
+      str += days[i].toValueString();
     }
     return str;
   }
