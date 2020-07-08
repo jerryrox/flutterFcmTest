@@ -3,9 +3,6 @@ import 'package:flutterFcmTest/models/ActivityModel.dart';
 
 class ActivityModelMemory extends ActivityModel {
 
-  final List<ActivityInfo> activities = List<ActivityInfo>();
-
-
   Future add(ActivityInfo activityInfo) {
     return Future.delayed(
       Duration(seconds: 1),
