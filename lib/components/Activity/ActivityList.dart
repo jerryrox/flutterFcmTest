@@ -9,16 +9,17 @@ class ActivityList extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final activityModel = Provider.of<ActivityModel>(context);
-
+    final activities = activityModel.getActivities();
+    
     return Expanded(
       flex: 1,
       child:Container(
         child: ListView.builder(
           scrollDirection: Axis.vertical,
-          itemCount: activityModel.activities.length,
+          itemCount: activities.length,
           itemBuilder: (context, index) {
             return ActivityCell(
-              activity: activityModel.activities[index],
+              activity: activities[index],
             );
           },
         ),
