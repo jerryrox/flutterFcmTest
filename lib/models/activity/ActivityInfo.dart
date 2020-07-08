@@ -10,6 +10,8 @@ class ActivityInfo {
     this.days
   });
 
+  bool containsDay(DayType day) => days.contains(day);
+
   String getDaysString() {
     String str = "";
     for(int i=0; i<days.length; i++) {
