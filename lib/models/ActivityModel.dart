@@ -13,7 +13,7 @@ abstract class ActivityModel with ChangeNotifier {
     // Get today's DoW
     DayType today = DateUtils.getTodayType();
     // Select activities for today.
-    todaysActivity.addAll(activities.where((a) => a.containsDay(today));
+    todaysActivity.addAll(activities.where((a) => a.containsDay(today)));
     return todaysActivity;
   }
 
