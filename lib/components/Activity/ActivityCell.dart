@@ -3,7 +3,7 @@ import 'package:flutterFcmTest/models/Activity/ActivityInfo.dart';
 
 class ActivityCell extends StatelessWidget {
 
-  ActivityInfo activity;
+  final ActivityInfo activity;
 
 
   ActivityCell({
