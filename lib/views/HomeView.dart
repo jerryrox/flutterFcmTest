@@ -14,6 +14,9 @@ class HomeView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               MenuBar(),
+              Container(
+                height: 10,
+              ),
               ActivityList(),
             ],
           ),
