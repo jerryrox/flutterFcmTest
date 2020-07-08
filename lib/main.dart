@@ -1,6 +1,7 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterFcmTest/models/ActivityModel.dart';
+import 'package:flutterFcmTest/models/ActivityModelMemory.dart';
 import 'package:provider/provider.dart';
 import 'views/ActivityView.dart';
 
@@ -20,7 +21,7 @@ class FcmTestApp extends StatelessWidget {
       ),
       home: MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => ActivityModel()),
+          ChangeNotifierProvider<ActivityModel>(create: (_) => ActivityModelMemory()),
         ],
         child: SafeArea(
           child: ActivityView(),
