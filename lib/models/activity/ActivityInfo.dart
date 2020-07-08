@@ -5,7 +5,10 @@ class ActivityInfo {
   final String name;
   final List<DayType> days;
 
-  ActivityInfo(this.name, this.days);
+  ActivityInfo({
+    this.name,
+    this.days
+  });
 
   String getDaysString() {
     String str = "";
