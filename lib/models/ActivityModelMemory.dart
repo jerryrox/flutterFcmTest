@@ -7,7 +7,7 @@ class ActivityModelMemory extends ActivityModel {
     return Future.delayed(
       Duration(seconds: 1),
       () {
-        this.activities.add(activityInfo);
+        this.allActivities.add(activityInfo);
         notifyListeners();
       }
     );
@@ -17,7 +17,7 @@ class ActivityModelMemory extends ActivityModel {
     return Future.delayed(
       Duration(seconds: 1),
       () {
-        this.activities.remove(activityInfo);
+        this.allActivities.remove(activityInfo);
         notifyListeners();
       }
     );
@@ -27,7 +27,7 @@ class ActivityModelMemory extends ActivityModel {
     return Future.delayed(
       Duration(seconds: 1),
       () {
-        this.activities.clear();
+        this.allActivities.clear();
         notifyListeners();
       }
     );
