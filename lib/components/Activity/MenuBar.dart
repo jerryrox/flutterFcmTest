@@ -43,20 +43,22 @@ class _MenuBarState extends State<MenuBar> {
     ));
   }
 
-  void _onMenuButton() {
+  void _onMenuButton(ActivityModel model) {
     print("_onMenuButton");
+    model.toggleDisplayAll();
   }
   
   @override
   Widget build(BuildContext context) {
 
     final activityModel = Provider.of<ActivityModel>(context);
+    final displayAll = activityModel.displayAll;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "Scheduled activities",
+          displayAll ? "All activities" : "Today's activities",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 24.0
@@ -88,7 +90,7 @@ class _MenuBarState extends State<MenuBar> {
             color: Colors.black,
             size: 20.0
           ),
-          onPressed: _onMenuButton,
+          onPressed: () => _onMenuButton(activityModel),
         ),
       ],
     );
