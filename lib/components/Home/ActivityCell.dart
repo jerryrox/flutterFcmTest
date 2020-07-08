@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutterFcmTest/models/Activity/ActivityInfo.dart';
 
 class ActivityCell extends StatelessWidget {
+
+  ActivityInfo activity;
+
+
+  ActivityCell({
+    Key key,
+    @required this.activity
+  }) : super(key: key);
 
   void _onClicked() {
     print("_onClicked");
@@ -27,10 +36,9 @@ class ActivityCell extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Title",
+                    activity.name,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      
                     ),
                     textAlign: TextAlign.left,
                   ),
@@ -39,7 +47,7 @@ class ActivityCell extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Content"
+                    "Days: ${activity.getDaysString()}"
                   ),
                 ],
               ),
