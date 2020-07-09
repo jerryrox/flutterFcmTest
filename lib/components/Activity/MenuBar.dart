@@ -15,8 +15,9 @@ class MenuBar extends StatefulWidget {
 
 class _MenuBarState extends State<MenuBar> {
 
-  void _onCalendarButton() {
+  void _onCalendarButton(ActivityModel model) {
     print("_onCalendarButton");
+    model.toggleDisplayAll();
   }
 
   void _onAddButton(ActivityModel model) {
@@ -29,7 +30,6 @@ class _MenuBarState extends State<MenuBar> {
 
   void _onMenuButton(ActivityModel model) {
     print("_onMenuButton");
-    model.toggleDisplayAll();
   }
   
   @override
@@ -47,7 +47,7 @@ class _MenuBarState extends State<MenuBar> {
             color: Colors.black,
             size: 20.0
           ),
-          onPressed: _onCalendarButton,
+          onPressed: () => _onCalendarButton(activityModel),
         ),
         IconButton(
           icon: Icon(
