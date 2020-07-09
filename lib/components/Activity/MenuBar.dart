@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutterFcmTest/animations/SlideInRoute.dart';
 import 'package:flutterFcmTest/components/TitleBar.dart';
 import 'package:flutterFcmTest/models/ActivityModel.dart';
 import 'package:flutterFcmTest/views/AddView.dart';
@@ -22,7 +23,7 @@ class _MenuBarState extends State<MenuBar> {
     print("_onAddButton");
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => AddView())
+      SlideInRoute(view: AddView())
     );
   }
 
