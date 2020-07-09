@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterFcmTest/components/Activity/ActivityList.dart';
 import 'package:flutterFcmTest/components/Activity/MenuBar.dart';
+import 'package:flutterFcmTest/components/Spacing.dart';
 import 'package:flutterFcmTest/components/ViewContainer.dart';
 
 class ActivityView extends StatelessWidget {
@@ -10,9 +11,7 @@ class ActivityView extends StatelessWidget {
     return ViewContainer(
       children: [
         MenuBar(),
-        Container(
-          height: 10,
-        ),
+        Spacing.vertical(),
         ActivityList(),
       ],
     );
