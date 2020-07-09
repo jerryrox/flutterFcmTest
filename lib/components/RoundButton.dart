@@ -4,10 +4,12 @@ class RoundButton extends StatelessWidget {
 
   final String label;
   final double width;
+  final Function onPressed;
 
   RoundButton(this.label, {
     Key key,
-    this.width
+    this.width,
+    this.onPressed,
   }) : super(key: key);
 
   @override
@@ -17,7 +19,7 @@ class RoundButton extends StatelessWidget {
       width: width,
       child: FlatButton(
         child: Text(label),
-        onPressed: () { },
+        onPressed: onPressed,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(22)
         ),
