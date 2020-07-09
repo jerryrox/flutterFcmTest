@@ -11,8 +11,7 @@ class TitleBar extends StatelessWidget {
     Key key,
     @required this.title,
     this.children,
-  }) : super(key: key) {
-  }
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
