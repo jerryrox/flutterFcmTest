@@ -69,17 +69,17 @@ class _FcmTestState extends State<FcmTestApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "FCM Test App",
-      theme: ThemeData(
-        accentColor: Colors.green,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MultiProvider(
-        providers: [
-          ChangeNotifierProvider<ActivityModel>(create: (_) => ActivityModelMemory()),
-        ],
-        child: ActivityView(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ActivityModel>(create: (_) => ActivityModelMemory()),
+      ],
+      child: MaterialApp(
+        title: "FCM Test App",
+        theme: ThemeData(
+          accentColor: Colors.green,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: ActivityView(),
       ),
     );
   }
