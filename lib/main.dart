@@ -79,9 +79,7 @@ class _FcmTestState extends State<FcmTestApp> {
         providers: [
           ChangeNotifierProvider<ActivityModel>(create: (_) => ActivityModelMemory()),
         ],
-        child: SafeArea(
-          child: AddView(),//ActivityView(),
-        ),
+        child: ActivityView(),
       ),
     );
   }
