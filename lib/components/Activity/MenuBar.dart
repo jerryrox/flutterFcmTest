@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutterFcmTest/components/TitleBar.dart';
 import 'package:flutterFcmTest/components/TitleText.dart';
 import 'package:flutterFcmTest/models/Activity/ActivityInfo.dart';
 import 'package:flutterFcmTest/models/ActivityModel.dart';
@@ -55,16 +56,9 @@ class _MenuBarState extends State<MenuBar> {
     final activityModel = Provider.of<ActivityModel>(context);
     final displayAll = activityModel.displayAll;
 
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return TitleBar(
+      title: displayAll ? "All activities" : "Today's activities",
       children: [
-        TitleText(
-          displayAll ? "All activities" : "Today's activities",
-        ),
-        Expanded(
-          flex: 1,
-          child: Container(),
-        ),
         IconButton(
           icon: Icon(
             Icons.calendar_today,
