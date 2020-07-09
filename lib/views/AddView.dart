@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterFcmTest/components/Add/ActivityNameInput.dart';
+import 'package:flutterFcmTest/components/RoundButton.dart';
 import 'package:flutterFcmTest/components/SectionBar.dart';
 import 'package:flutterFcmTest/components/Spacing.dart';
 import 'package:flutterFcmTest/components/TitleBar.dart';
@@ -49,7 +50,10 @@ class _AddViewState extends State<AddView> {
           title: "Days",
         ),
         Spacing.vertical(height: 20,),
-        
+        RoundButton(
+          "Create",
+          width: 160,
+        ),
       ],
     );
   }
