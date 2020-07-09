@@ -2,10 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutterFcmTest/components/TitleBar.dart';
-import 'package:flutterFcmTest/components/TitleText.dart';
-import 'package:flutterFcmTest/models/Activity/ActivityInfo.dart';
 import 'package:flutterFcmTest/models/ActivityModel.dart';
-import 'package:flutterFcmTest/models/common/DayType.dart';
+import 'package:flutterFcmTest/views/AddView.dart';
 import 'package:provider/provider.dart';
 
 class MenuBar extends StatefulWidget {
@@ -16,33 +14,16 @@ class MenuBar extends StatefulWidget {
 
 class _MenuBarState extends State<MenuBar> {
 
-  Random _random = Random();
-
-  String getRandomName() => "Random name ${_random.nextInt(1000)}";
-
-  List<DayType> getRandomDays() {
-    var days = List<DayType>();
-    DayType.values.forEach((day) {
-      if(_random.nextDouble() < 0.35) {
-        days.add(day);
-      }
-    });
-    if(days.length == 0) {
-      days.add(DayType.Monday);
-    }
-    return days;
-  }
-
   void _onCalendarButton() {
     print("_onCalendarButton");
   }
 
   void _onAddButton(ActivityModel model) {
     print("_onAddButton");
-    model.add(ActivityInfo(
-      name: getRandomName(),
-      days: getRandomDays()
-    ));
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AddView())
+    );
   }
 
   void _onMenuButton(ActivityModel model) {
