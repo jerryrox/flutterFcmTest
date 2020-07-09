@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterFcmTest/components/Add/ActivityNameInput.dart';
+import 'package:flutterFcmTest/components/Add/DaysFilter.dart';
 import 'package:flutterFcmTest/components/RoundButton.dart';
 import 'package:flutterFcmTest/components/SectionBar.dart';
 import 'package:flutterFcmTest/components/Spacing.dart';
@@ -27,6 +28,12 @@ class _AddViewState extends State<AddView> {
     print("ActivityName: $name");
   }
 
+  void _onDayChanged(List<DayType> days) {
+    setState(() {
+      this._days = days;
+    });
+  }
+
   void _onCreateButton() {
     activityModel.add(ActivityInfo(
       name: _name,
@@ -50,6 +57,10 @@ class _AddViewState extends State<AddView> {
           title: "Days",
         ),
         Spacing.vertical(height: 20,),
+        DaysFilter(
+          onChanged: _onDayChanged,
+        ),
+        Spacing.vertical(height: 40,),
         RoundButton(
           "Create",
           width: 160,
