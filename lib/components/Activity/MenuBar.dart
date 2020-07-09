@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutterFcmTest/components/TitleText.dart';
 import 'package:flutterFcmTest/models/Activity/ActivityInfo.dart';
 import 'package:flutterFcmTest/models/ActivityModel.dart';
 import 'package:flutterFcmTest/models/common/DayType.dart';
@@ -57,12 +58,8 @@ class _MenuBarState extends State<MenuBar> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
+        TitleText(
           displayAll ? "All activities" : "Today's activities",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 24.0
-          ),
         ),
         Expanded(
           flex: 1,
