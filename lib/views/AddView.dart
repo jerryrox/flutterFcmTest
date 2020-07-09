@@ -22,8 +22,6 @@ class _AddViewState extends State<AddView> {
   String _name = "";
   List<DayType> _days = List<DayType>();
 
-  ActivityModel get activityModel => Provider.of(context);
-
   void _onActivityNameSubmitted(String name) {
     setState(() {
       this._name = name.trim();
@@ -36,7 +34,11 @@ class _AddViewState extends State<AddView> {
     });
   }
 
-  void _onCreateButton() async {
+  void _onCloseButton() {
+    Navigator.pop(context);
+  }
+
+  void _onCreateButton(ActivityModel activityModel) async {
     if(_name == null || _name.length == 0) {
       print("Invalid name");
       return;
@@ -51,15 +53,27 @@ class _AddViewState extends State<AddView> {
       days: _days
     ));
     print("Added model");
-    Navigator.pop(context);
+    Navigator.of(context).pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
+    final activityModel = Provider.of<ActivityModel>(context);
+
     return ViewContainer(
       children: [
         TitleBar(
           title: "New activity",
+          children: [
+            IconButton(
+              icon: Icon(
+                Icons.close,
+                color: Colors.black,
+                size: 20,
+              ),
+              onPressed: _onCloseButton,
+            )
+          ],
         ),
         Spacing.vertical(height: 40,),
         ActivityNameInput(
@@ -77,7 +91,7 @@ class _AddViewState extends State<AddView> {
         RoundButton(
           "Create",
           width: 160,
-          onPressed: _onCreateButton,
+          onPressed: () => _onCreateButton(activityModel),
         ),
       ],
     );
