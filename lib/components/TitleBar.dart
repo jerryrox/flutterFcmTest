@@ -1,0 +1,30 @@
+import 'package:flutter/material.dart';
+import 'package:flutterFcmTest/components/TitleText.dart';
+
+class TitleBar extends StatelessWidget {
+
+  final String title;
+  final List<Widget> children;
+
+  TitleBar({
+    Key key,
+    @required this.title,
+    @required this.children
+  }) : super(key: key) {
+    this.children.insert(0, TitleText(
+      title
+    ));
+    this.children.insert(1, Expanded(
+      flex: 1,
+      child: Container()
+    ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: children,
+    );
+  }
+}
