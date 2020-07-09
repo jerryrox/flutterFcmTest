@@ -1,4 +1,4 @@
-// import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterFcmTest/models/ActivityModel.dart';
 import 'package:flutterFcmTest/models/ActivityModelMemory.dart';
@@ -9,7 +9,62 @@ void main() {
   runApp(FcmTestApp());
 }
 
-class FcmTestApp extends StatelessWidget {
+Future<dynamic> onFcmBackgroundMessage(Map<String, dynamic> message) {
+  print("onBackgroundMessage: $message");
+}
+
+class FcmTestApp extends StatefulWidget {
+
+  @override
+  _FcmTestState createState() => _FcmTestState();
+}
+
+class _FcmTestState extends State<FcmTestApp> {
+
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
+  String _token = "";
+  String _message = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _registerFcm();
+    _getMessage();
+  }
+
+  void _getMessage() {
+    _firebaseMessaging.configure(
+      onBackgroundMessage: onFcmBackgroundMessage,
+      onLaunch: (message) async {
+        setState(() {
+          this._message = message["notification"]["title"];
+        });
+        print("onLaunch: $message");
+      },
+      onMessage: (message) async {
+        setState(() {
+          this._message = message["notification"]["title"];
+        });
+        print("onMessage: $message");
+      },
+      onResume: (message) async {
+        setState(() {
+          this._message = message["notification"]["title"];
+        });
+        print("onResume: $message");
+      }
+    );
+  }
+
+  void _registerFcm() {
+    _firebaseMessaging.getToken().then((value) {
+      setState(() {
+        this._token = value;
+      });
+      print("Token: $value");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +90,6 @@ class FcmTestApp extends StatelessWidget {
 //   runApp(MyApp());
 // }
 
-// Future<dynamic> onFcmBackgroundMessage(Map<String, dynamic> message) {
-//   print("onBackgroundMessage: $message");
-// }
-
 // class MyApp extends StatefulWidget {
 
 //   @override
@@ -47,49 +98,7 @@ class FcmTestApp extends StatelessWidget {
 
 // class _MyAppState extends State<MyApp> {
 
-//   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
-//   String _token = "";
-//   String _message = "";
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _getMessage();
-//   }
-
-//   void _getMessage() {
-//     _firebaseMessaging.configure(
-//       onBackgroundMessage: onFcmBackgroundMessage,
-//       onLaunch: (message) async {
-//         setState(() {
-//           this._message = message["notification"]["title"];
-//         });
-//         print("onLaunch: $message");
-//       },
-//       onMessage: (message) async {
-//         setState(() {
-//           this._message = message["notification"]["title"];
-//         });
-//         print("onMessage: $message");
-//       },
-//       onResume: (message) async {
-//         setState(() {
-//           this._message = message["notification"]["title"];
-//         });
-//         print("onResume: $message");
-//       }
-//     );
-//   }
-
-//   void _onRegisterButton() {
-//     _firebaseMessaging.getToken().then((value) {
-//       setState(() {
-//         this._token = value;
-//       });
-//       print("Token: $value");
-//     });
-//   }
 
 //   @override
 //   Widget build(BuildContext context) {
