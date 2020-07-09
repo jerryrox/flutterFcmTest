@@ -4,12 +4,12 @@ import 'package:flutterFcmTest/components/TitleText.dart';
 class TitleBar extends StatelessWidget {
 
   final String title;
-  final List<Widget> children;
+  final List<Widget> children = List<Widget>();
 
   TitleBar({
     Key key,
     @required this.title,
-    @required this.children
+    List<Widget> children,
   }) : super(key: key) {
     this.children.insert(0, TitleText(
       title
@@ -18,6 +18,10 @@ class TitleBar extends StatelessWidget {
       flex: 1,
       child: Container()
     ));
+
+    if(children != null) {
+      this.children.addAll(children);
+    }
   }
 
   @override
