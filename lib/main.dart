@@ -2,6 +2,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterFcmTest/models/ActivityModel.dart';
 import 'package:flutterFcmTest/models/ActivityModelMemory.dart';
+import 'package:flutterFcmTest/views/AddView.dart';
 import 'package:provider/provider.dart';
 import 'views/ActivityView.dart';
 
@@ -68,19 +69,17 @@ class _FcmTestState extends State<FcmTestApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "FCM Test App",
-      theme: ThemeData(
-        accentColor: Colors.green,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MultiProvider(
-        providers: [
-          ChangeNotifierProvider<ActivityModel>(create: (_) => ActivityModelMemory()),
-        ],
-        child: SafeArea(
-          child: ActivityView(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ActivityModel>(create: (_) => ActivityModelMemory()),
+      ],
+      child: MaterialApp(
+        title: "FCM Test App",
+        theme: ThemeData(
+          accentColor: Colors.green,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
+        home: ActivityView(),
       ),
     );
   }
