@@ -22,7 +22,7 @@ class _AddViewState extends State<AddView> {
   String _name = "";
   List<DayType> _days = List<DayType>();
 
-  void _onActivityNameSubmitted(String name) {
+  void _onActivityNameChanged(String name) {
     setState(() {
       this._name = name.trim();
     });
@@ -77,7 +77,7 @@ class _AddViewState extends State<AddView> {
         ),
         Spacing.vertical(height: 40,),
         ActivityNameInput(
-          onSubmitted: _onActivityNameSubmitted,
+          onChanged: _onActivityNameChanged,
         ),
         Spacing.vertical(height: 40,),
         SectionBar(

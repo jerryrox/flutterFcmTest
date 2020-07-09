@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class ActivityNameInput extends StatelessWidget {
 
-  final Function(String) onSubmitted;
+  final Function(String) onChanged;
 
   ActivityNameInput({
     Key key,
-    this.onSubmitted,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -21,7 +21,7 @@ class ActivityNameInput extends StatelessWidget {
         ),
         child: Center(
           child: TextField(
-            onSubmitted: onSubmitted,
+            onChanged: onChanged,
             textAlign: TextAlign.center,
             decoration: InputDecoration(
               hintText: "Enter activity name",
