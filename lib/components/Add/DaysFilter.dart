@@ -33,6 +33,7 @@ class _DaysFilterState extends State<DaysFilter> {
       else {
         selectedDay.add(dayType);
       }
+      invokeChange();
     });
   }
   
@@ -43,8 +44,6 @@ class _DaysFilterState extends State<DaysFilter> {
       onPressed: () => onDayButton(dayType),
     );
   }
-
-
 
   @override
   Widget build(BuildContext context) {
