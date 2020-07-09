@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterFcmTest/components/Add/ActivityNameInput.dart';
+import 'package:flutterFcmTest/components/SectionBar.dart';
 import 'package:flutterFcmTest/components/Spacing.dart';
 import 'package:flutterFcmTest/components/TitleBar.dart';
 import 'package:flutterFcmTest/components/ViewContainer.dart';
@@ -39,10 +40,16 @@ class _AddViewState extends State<AddView> {
         TitleBar(
           title: "New activity",
         ),
-        Spacing.vertical(height: 20,),
+        Spacing.vertical(height: 40,),
         ActivityNameInput(
           onSubmitted: _onActivityNameSubmitted,
         ),
+        Spacing.vertical(height: 40,),
+        SectionBar(
+          title: "Days",
+        ),
+        Spacing.vertical(height: 20,),
+        
       ],
     );
   }
