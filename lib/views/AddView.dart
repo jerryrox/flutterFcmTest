@@ -25,7 +25,9 @@ class _AddViewState extends State<AddView> {
   ActivityModel get activityModel => Provider.of(context);
 
   void _onActivityNameSubmitted(String name) {
-    print("ActivityName: $name");
+    setState(() {
+      this._name = name.trim();
+    });
   }
 
   void _onDayChanged(List<DayType> days) {
@@ -34,11 +36,22 @@ class _AddViewState extends State<AddView> {
     });
   }
 
-  void _onCreateButton() {
-    activityModel.add(ActivityInfo(
+  void _onCreateButton() async {
+    if(_name == null || _name.length == 0) {
+      print("Invalid name");
+      return;
+    }
+    if(_days == null || _days.length == 0) {
+      print("Invalid days");
+      return;
+    }
+
+    await activityModel.add(ActivityInfo(
       name: _name,
       days: _days
     ));
+    print("Added model");
+    Navigator.pop(context);
   }
 
   @override
@@ -64,6 +77,7 @@ class _AddViewState extends State<AddView> {
         RoundButton(
           "Create",
           width: 160,
+          onPressed: _onCreateButton,
         ),
       ],
     );
