@@ -10,6 +10,10 @@ class ActivityInfo {
     this.days
   });
 
+  ActivityInfo.fromMap(Map<dynamic, dynamic> data) :
+    name = data["name"],
+    days = List<DayType>.from(data["days"]);
+
   bool containsDay(DayType day) => days.contains(day);
 
   String getDaysString() {
