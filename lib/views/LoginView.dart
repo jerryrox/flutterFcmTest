@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterFcmTest/animations/FadeInRoute.dart';
+import 'package:flutterFcmTest/components/FullScreenLoader.dart';
 import 'package:flutterFcmTest/components/Login/GoogleLoginButton.dart';
 import 'package:flutterFcmTest/components/Login/TitleDisplay.dart';
 import 'package:flutterFcmTest/components/Spacing.dart';
@@ -28,16 +29,7 @@ class LoginView extends StatelessWidget {
       builder: (context, snapshot) {
         if(snapshot.connectionState == ConnectionState.none ||
           snapshot.connectionState == ConnectionState.waiting) {
-          return ViewContainer(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ),
-            ],
-          );
+          return FullScreenLoader();
         }
         if(snapshot.hasError) {
           return Text("Error: ${snapshot.error}");
