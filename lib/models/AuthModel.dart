@@ -4,18 +4,20 @@ import 'package:flutterFcmTest/models/Authenticator.dart';
 
 class AuthModel with ChangeNotifier {
 
-  FirebaseUser user;
-  
   /// Returns whether the user is currently logged in.
   bool get isLoggedIn => authenticator.isLoggedIn;
 
 
   AuthModel() {
     authenticator.userStream.listen(this._onUserChanged);
+    this._onUserChanged(authenticator.currentUser);
   }
+
+  Future<bool> autoLogin() => authenticator.autoLogin();
+
+  Future googleSignIn() => authenticator.googleSignIn();
   
   void _onUserChanged(FirebaseUser user) {
-    this.user = user;
     notifyListeners();
   }
 }

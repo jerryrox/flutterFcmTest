@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterFcmTest/animations/FadeInRoute.dart';
 import 'package:flutterFcmTest/components/FullScreenLoader.dart';
