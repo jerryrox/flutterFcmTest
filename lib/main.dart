@@ -4,6 +4,7 @@ import 'package:flutterFcmTest/models/ActivityModel.dart';
 import 'package:flutterFcmTest/models/ActivityModelMemory.dart';
 import 'package:flutterFcmTest/models/AuthModel.dart';
 import 'package:flutterFcmTest/views/AddView.dart';
+import 'package:flutterFcmTest/views/LoginView.dart';
 import 'package:provider/provider.dart';
 import 'views/ActivityView.dart';
 
@@ -81,7 +82,7 @@ class _FcmTestState extends State<FcmTestApp> {
           accentColor: Colors.green,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: ActivityView(),
+        home: LoginView(),
       ),
     );
   }
