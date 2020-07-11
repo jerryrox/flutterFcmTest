@@ -27,6 +27,16 @@ class AuthModel with ChangeNotifier {
     _auth.onAuthStateChanged.listen(this._onAuthStateChange);
   }
 
+  /// Performs automatic login and returns whether the user is authenticated successfully.
+  Future<bool> autoLogin() async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    if(user == null)
+      return false;
+
+    await updateUserData(user);
+    return true;
+  }
+
   /// Signs in using google login.
   Future<FirebaseUser> googleSignIn() async {
     _setLoading(true);
@@ -38,13 +48,13 @@ class AuthModel with ChangeNotifier {
       accessToken: googleAuth.accessToken
     );
     AuthResult authResult = await _auth.signInWithCredential(credential);
-    updateUserData(authResult.user);
+    await updateUserData(authResult.user);
 
     _setLoading(false);
     return authResult.user;
   }
   
-  void updateUserData(FirebaseUser user) async {
+  Future<void> updateUserData(FirebaseUser user) async {
     DocumentReference ref = _db.collection("users").document(user.uid);
     await ref.setData({
       "uid": user.uid,
