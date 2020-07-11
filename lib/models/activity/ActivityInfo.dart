@@ -12,9 +12,17 @@ class ActivityInfo {
 
   ActivityInfo.fromMap(Map<dynamic, dynamic> data) :
     name = data["name"],
-    days = List<DayType>.from(data["days"]);
+    // This is a dirty way of parsing enum array due to Dart's limitation on enums.
+    days = List<String>.from(data["days"])
+      .map((dayString) => DayType.values.firstWhere((day) => day.toValueString() == dayString)
+    ).toList();
 
   bool containsDay(DayType day) => days.contains(day);
+
+  Map<String, dynamic> toMap() => {
+    "name": this.name,
+    "days": this.days.map((day) => day.toValueString()).toList()
+  };
 
   String getDaysString() {
     String str = "";
