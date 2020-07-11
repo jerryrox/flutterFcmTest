@@ -7,9 +7,6 @@ import 'package:flutterFcmTest/models/Authenticator.dart';
 class ActivityModelFirestore extends ActivityModel {
 
   final Firestore _db = Firestore.instance;
-
-  FirebaseUser user;
-  Map<String, dynamic> profile;
   
 
   ActivityModelFirestore() {
@@ -21,12 +18,11 @@ class ActivityModelFirestore extends ActivityModel {
     try {
       this.allActivities.add(activityInfo);
 
-      await _db.collection("users").document(user.uid).setData({
-        "activities": this.allActivities
-      });
+      await _writeActivities();
       notifyListeners();
     }
     catch(e) {
+      print(e.toString());
       this.allActivities.remove(activityInfo);
     }
   }
@@ -34,12 +30,11 @@ class ActivityModelFirestore extends ActivityModel {
   Future remove(ActivityInfo activityInfo) async {
     try {
       if(this.allActivities.remove(activityInfo)) {
-        await _db.collection("users").document(user.uid).setData({
-          "activities": this.allActivities
-        });
+        await _writeActivities();
       }
     }
     catch(e) {
+      print(e.toString());
       this.allActivities.add(activityInfo);
     }
   }
@@ -48,22 +43,25 @@ class ActivityModelFirestore extends ActivityModel {
     List<ActivityInfo> backup = List<ActivityInfo>.from(this.allActivities);
     try {
       this.allActivities.clear();
-      await _db.collection("users").document(user.uid).setData({
-        "activities": this.allActivities
-      });
+      await _writeActivities();
     }
     catch(e) {
+      print(e.toString());
       this.allActivities.addAll(backup);
     }
   }
+
+  Future _writeActivities() {
+    return _db.collection("users").document(authenticator.currentUser.uid).updateData({
+      "activities": this.allActivities.map((a) => a.toMap()).toList()
+    });
+  }
   
   void _onUserChanged(FirebaseUser user) {
-    this.user = user;
+    notifyListeners();
   }
 
   void _onProfileChanged(Map<String, dynamic> profile) {
-    this.profile = profile;
-
     this.allActivities.clear();
     if(profile.containsKey("activities")) {
       this.allActivities.addAll(

@@ -12,20 +12,36 @@ class Authenticator {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final Firestore _db = Firestore.instance;
 
-  Stream<FirebaseUser> userStream;
-  Stream<Map<String, dynamic>> profileStream;
+  Stream<FirebaseUser> _userStream;
+  FirebaseUser _currentUser;
 
-  FirebaseUser _user;
-  Map<String, dynamic> _profile;
+  Stream<Map<String, dynamic>> _profileStream;
+  StreamController<Map<String, dynamic>> _profileController;
   StreamSubscription<Map<String, dynamic>> _profileListener;
+  Map<String, dynamic> _currentProfile;
 
   /// Returns whether the user is currently logged in.
-  bool get isLoggedIn => _user != null;
+  bool get isLoggedIn => _currentUser != null;
+
+  /// Returns the current user seen by the firebase auth.
+  FirebaseUser get currentUser => _currentUser;
+
+  /// Returns the current user's latest profile.
+  Map<String, dynamic> get currentProfile => _currentProfile;
+
+  /// Returns the listenable stream of current user.
+  Stream<FirebaseUser> get userStream => _userStream;
+  
+  /// Returns the listenable stream of current user's profile data.
+  Stream<Map<String, dynamic>> get profileStream => _profileStream;
 
 
   Authenticator() {
-    this.userStream = _auth.onAuthStateChanged;
-    this.userStream.listen(this._onAuthStateChange);
+    this._userStream = _auth.onAuthStateChanged;
+    this._userStream.listen(this._onAuthStateChange);
+
+    this._profileController = StreamController<Map<String, dynamic>>();
+    this._profileStream = this._profileController.stream;
   }
 
   /// Performs automatic login and returns whether the user is authenticated successfully.
@@ -66,6 +82,10 @@ class Authenticator {
     return _auth.signOut();
   }
 
+  void dispose() {
+    _profileController.close();
+  }
+
   void _loadProfile(FirebaseUser user) {
     // Cancel previous stream subscription.
     if(_profileListener != null) {
@@ -89,12 +109,12 @@ class Authenticator {
   }
 
   void _onAuthStateChange(FirebaseUser user) {
-    this._user = user;
+    this._currentUser = user;
     _loadProfile(user);
   }
 
   void _onProfileChange(Map<String, dynamic> profile) {
-    this._profile = profile;
+    this._profileController.add(profile);
   }
 }
 final authenticator = Authenticator();
