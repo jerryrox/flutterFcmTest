@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutterFcmTest/models/ActivityModel.dart';
 import 'package:flutterFcmTest/models/ActivityModelMemory.dart';
 import 'package:flutterFcmTest/models/AuthModel.dart';
-import 'package:flutterFcmTest/views/AddView.dart';
 import 'package:flutterFcmTest/views/LoginView.dart';
 import 'package:provider/provider.dart';
-import 'views/ActivityView.dart';
 
 void main() {
   runApp(FcmTestApp());
