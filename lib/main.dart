@@ -57,7 +57,7 @@ class _FcmTestState extends State<FcmTestApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ActivityModel>(create: (_) => ActivityModelMemory()),
+        ChangeNotifierProvider<ActivityModel>(create: (_) => ActivityModelFirestore()),// ActivityModelMemory()),
         ChangeNotifierProvider<AuthModel>(create: (_) => AuthModel()),
       ],
       child: MaterialApp(
