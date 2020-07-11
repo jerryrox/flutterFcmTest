@@ -7,7 +7,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthModel with ChangeNotifier {
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: [
+    "email"
+  ]);
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final Firestore _db = Firestore.instance;
 
