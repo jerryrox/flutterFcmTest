@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterFcmTest/models/ActivityModel.dart';
+import 'package:flutterFcmTest/models/ActivityModelFirestore.dart';
 import 'package:flutterFcmTest/models/ActivityModelMemory.dart';
 import 'package:flutterFcmTest/models/AuthModel.dart';
 import 'package:flutterFcmTest/views/LoginView.dart';
@@ -24,9 +25,6 @@ class _FcmTestState extends State<FcmTestApp> {
 
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
-  String _token = "";
-  String _message = "";
-
   @override
   void initState() {
     super.initState();
@@ -38,21 +36,12 @@ class _FcmTestState extends State<FcmTestApp> {
     _firebaseMessaging.configure(
       onBackgroundMessage: onFcmBackgroundMessage,
       onLaunch: (message) async {
-        setState(() {
-          this._message = message["notification"]["title"];
-        });
         print("onLaunch: $message");
       },
       onMessage: (message) async {
-        setState(() {
-          this._message = message["notification"]["title"];
-        });
         print("onMessage: $message");
       },
       onResume: (message) async {
-        setState(() {
-          this._message = message["notification"]["title"];
-        });
         print("onResume: $message");
       }
     );
@@ -60,9 +49,6 @@ class _FcmTestState extends State<FcmTestApp> {
 
   void _registerFcm() {
     _firebaseMessaging.getToken().then((value) {
-      setState(() {
-        this._token = value;
-      });
       print("Token: $value");
     });
   }
